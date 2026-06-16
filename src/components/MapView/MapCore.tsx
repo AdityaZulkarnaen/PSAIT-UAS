@@ -39,7 +39,6 @@ export default function MapCore() {
     useMapContext()
 
   const [mapInstance, setMapInstance] = useState<LeafletMap | null>(null)
-  const [layersVisible, setLayersVisible] = useState(true)
 
   const manholeRefs = useRef<Record<string, LeafletCircleMarker | null>>({})
   const pipeRefs = useRef<Record<string, LeafletPolyline | null>>({})
@@ -92,30 +91,24 @@ export default function MapCore() {
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
-        {layersVisible && (
-          <>
-            <PipeLayer
-              pipes={filteredPipes}
-              registerRef={(id, layer) => {
-                pipeRefs.current[id] = layer
-              }}
-            />
-            <ManholeLayer
-              manholes={filteredManholes}
-              registerRef={(id, layer) => {
-                manholeRefs.current[id] = layer
-              }}
-            />
-          </>
-        )}
+        <PipeLayer
+          pipes={filteredPipes}
+          registerRef={(id, layer) => {
+            pipeRefs.current[id] = layer
+          }}
+        />
+        <ManholeLayer
+          manholes={filteredManholes}
+          registerRef={(id, layer) => {
+            manholeRefs.current[id] = layer
+          }}
+        />
       </MapContainer>
 
       <MapControls
         onZoomIn={() => mapInstance?.zoomIn()}
         onZoomOut={() => mapInstance?.zoomOut()}
         onLocate={handleLocate}
-        onToggleLayers={() => setLayersVisible((v) => !v)}
-        layersVisible={layersVisible}
       />
     </div>
   )

@@ -51,11 +51,18 @@ body {
 
 /* Popup look & feel */
 .leaflet-popup-content-wrapper {
-  border-radius: 0.75rem;
+  border-radius: 0.9rem;
   padding: 0;
   overflow: hidden;
+  box-shadow: 0 24px 60px rgba(15, 23, 42, 0.18);
 }
 .leaflet-popup-content {
-  margin: 0;
-  width: 260px !important;
+  margin: 0px;
+  width: 248px !important;
+}
+.leaflet-popup-content p{
+  margin: 0px;
+}
+.leaflet-popup-tip {
+  box-shadow: 0 24px 60px rgba(15, 23, 42, 0.18);
 }

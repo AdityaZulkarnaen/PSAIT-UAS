@@ -1,23 +1,21 @@
 'use client'
 
-import { useMapContext } from '@/context/MapContext'
+import Image from 'next/image'
+import logo from '../../public/images/Yogyakarta_Logo1.png'
 
 export default function Header() {
-  const { toggleSidebar } = useMapContext()
-
   return (
-    <header className="fixed inset-x-0 top-0 z-[1100] border-b border-slate-200 bg-white px-3 py-2 sm:px-4">
+    <header className="fixed inset-x-0 top-0 z-1100 border-b border-slate-200 bg-white px-3 py-2 sm:px-4">
       <div className="flex items-center justify-between gap-3">
         <div className="flex min-w-0 items-center gap-2.5">
-          <button
-            onClick={toggleSidebar}
-            aria-label="Toggle sidebar"
-            className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg text-slate-600 transition-colors hover:bg-slate-100"
-          >
-            ☰
-          </button>
-          <span className="text-2xl">🏛️</span>
-          <h1 className="max-w-[220px] text-sm font-bold leading-tight text-slate-800 sm:max-w-md">
+          <Image
+            src={logo}
+            alt="Logo"
+            width={40}
+            height={40}
+            className="h-10 w-8 rounded-full"
+          />
+          <h1 className="max-w-55 text-sm font-bold leading-tight text-slate-800 sm:max-w-md">
             Balai Pengelolaan Air Limbah dan Pengembangan Jasa Konstruksi
           </h1>
         </div>
