@@ -7,7 +7,7 @@ export default function LegendaPeta() {
   const [open, setOpen] = useState(true)
 
   return (
-    <div className="absolute right-4 top-4 z-[500] w-44 rounded-xl border border-slate-200 bg-white p-3 shadow-lg">
+    <div className="absolute right-4 top-24 z-600 w-44 rounded-2xl border border-slate-200/80 bg-white/95 p-3 shadow-[0_18px_40px_rgba(15,23,42,0.14)] backdrop-blur-md">
       <div className="flex items-center justify-between">
         <span className="text-xs font-bold uppercase tracking-wide text-slate-700">
           Legenda Peta

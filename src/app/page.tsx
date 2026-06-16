@@ -14,16 +14,14 @@ const MapView = dynamic(() => import('@/components/MapView'), { ssr: false })
 export default function Home() {
   return (
     <MapProvider>
-      <div className="flex h-screen flex-col">
-        <Header />
-        <div className="relative flex flex-1 overflow-hidden">
-          <Sidebar />
-          <main className="relative flex-1">
-            <MapView />
-            <LegendaPeta />
-            <SearchBar />
-          </main>
+      <div className="relative h-dvh overflow-hidden bg-slate-100">
+        <div className="absolute inset-0">
+          <MapView />
         </div>
+        <Header />
+        <Sidebar />
+        <LegendaPeta />
+        <SearchBar />
         <Footer />
       </div>
     </MapProvider>
