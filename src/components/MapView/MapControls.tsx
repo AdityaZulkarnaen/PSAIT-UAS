@@ -41,16 +41,16 @@ export default function MapControls({
   layersVisible,
 }: Props) {
   return (
-    <div className="absolute bottom-6 right-4 z-[500] flex flex-col gap-2">
+    <div className="absolute bottom-10 right-4 z-[500] flex flex-col gap-2">
       <ControlButton label="＋" title="Perbesar" onClick={onZoomIn} />
       <ControlButton label="－" title="Perkecil" onClick={onZoomOut} />
       <ControlButton label="◎" title="Lokasi saya" onClick={onLocate} />
-      <ControlButton
+      {/* <ControlButton
         label="▦"
         title={layersVisible ? 'Sembunyikan layer' : 'Tampilkan layer'}
         onClick={onToggleLayers}
         active={layersVisible}
-      />
+      /> */}
     </div>
   )
 }

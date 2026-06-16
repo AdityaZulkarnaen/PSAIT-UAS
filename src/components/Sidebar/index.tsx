@@ -20,7 +20,7 @@ export default function Sidebar() {
 
   return (
     <>
-      <aside className="fixed left-4 top-21.5 z-950 w-85 max-w-[calc(100vw-2rem)] space-y-4 overflow-y-auto">
+      <aside className="fixed left-4 top-16 z-950 w-85 max-w-[calc(100vw-2rem)] space-y-4 overflow-y-auto">
         <FilterJaringan open={openFilter} onToggle={toggleFilter} />
         <StatistikJaringan open={openStatistik} onToggle={toggleStatistik} />
       </aside>
