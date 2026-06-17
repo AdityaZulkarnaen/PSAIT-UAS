@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(curl -s https://psait-x-pad.onrender.com/openapi.json)"
+    ]
+  }
+}

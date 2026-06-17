@@ -53,8 +53,9 @@ export function useMapSearch(
 
       const pipa = pipes.find((p) => p.id.toLowerCase() === q)
       if (pipa) {
-        const lats = pipa.koordinat.map((c) => c[0])
-        const lngs = pipa.koordinat.map((c) => c[1])
+        const points = pipa.koordinat.flat()
+        const lats = points.map((c) => c[0])
+        const lngs = points.map((c) => c[1])
         const bounds: [[number, number], [number, number]] = [
           [Math.min(...lats), Math.min(...lngs)],
           [Math.max(...lats), Math.max(...lngs)],

@@ -1,11 +1,13 @@
 'use client'
 
-import { useMemo, useState } from 'react'
-import { manholes, pipes } from '@/data/dummy'
+import { useEffect, useMemo, useState } from 'react'
+import { fetchManholes, fetchPipes } from '@/lib/api'
 import {
   ALL_STATUS,
   type FilterState,
   type FungsiPipa,
+  type Manhole,
+  type Pipa,
   type StatusAset,
 } from '@/types'
 
@@ -34,10 +36,39 @@ function countByStatus<T extends { status: StatusAset }>(
  * secara reaktif. Statistik dihitung dari keseluruhan jaringan (bukan hasil filter).
  */
 export function useMapFilter() {
+  const [manholes, setManholes] = useState<Manhole[]>([])
+  const [pipes, setPipes] = useState<Pipa[]>([])
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
+
   const [filter, setFilter] = useState<FilterState>({
     status: [...ALL_STATUS],
     fungsiPipa: 'Semua Fungsi Pipa',
   })
+
+  useEffect(() => {
+    let cancelled = false
+
+    Promise.all([fetchManholes(), fetchPipes()])
+      .then(([mh, pp]) => {
+        if (cancelled) return
+        setManholes(mh)
+        setPipes(pp)
+      })
+      .catch((err: unknown) => {
+        if (cancelled) return
+        setError(
+          err instanceof Error ? err.message : 'Gagal memuat data jaringan.',
+        )
+      })
+      .finally(() => {
+        if (!cancelled) setLoading(false)
+      })
+
+    return () => {
+      cancelled = true
+    }
+  }, [])
 
   const toggleStatus = (status: StatusAset) =>
     setFilter((prev) => ({
@@ -52,7 +83,7 @@ export function useMapFilter() {
 
   const filteredManholes = useMemo(
     () => manholes.filter((m) => filter.status.includes(m.status)),
-    [filter.status],
+    [manholes, filter.status],
   )
 
   const filteredPipes = useMemo(
@@ -63,7 +94,7 @@ export function useMapFilter() {
           (filter.fungsiPipa === 'Semua Fungsi Pipa' ||
             p.fungsi === (filter.fungsiPipa as FungsiPipa)),
       ),
-    [filter.status, filter.fungsiPipa],
+    [pipes, filter.status, filter.fungsiPipa],
   )
 
   const stats = useMemo<NetworkStats>(
@@ -74,7 +105,7 @@ export function useMapFilter() {
       manholeByStatus: countByStatus(manholes),
       pipaByStatus: countByStatus(pipes),
     }),
-    [],
+    [manholes, pipes],
   )
 
   return {
@@ -84,5 +115,7 @@ export function useMapFilter() {
     filteredManholes,
     filteredPipes,
     stats,
+    loading,
+    error,
   }
 }

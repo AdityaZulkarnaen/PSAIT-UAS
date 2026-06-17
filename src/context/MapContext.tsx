@@ -20,6 +20,8 @@ interface MapContextValue {
   filteredManholes: Manhole[]
   filteredPipes: Pipa[]
   stats: NetworkStats
+  loading: boolean
+  error: string | null
   // Map instance
   setMap: (map: LeafletMap | null) => void
   // Search
@@ -40,6 +42,8 @@ export function MapProvider({ children }: { children: ReactNode }) {
     filteredManholes,
     filteredPipes,
     stats,
+    loading,
+    error,
   } = useMapFilter()
 
   const [map, setMap] = useState<LeafletMap | null>(null)
@@ -60,13 +64,25 @@ export function MapProvider({ children }: { children: ReactNode }) {
       filteredManholes,
       filteredPipes,
       stats,
+      loading,
+      error,
       setMap,
       search,
       focusTarget,
       sidebarOpen,
       toggleSidebar,
     }),
-    [filter, filteredManholes, filteredPipes, stats, search, focusTarget, sidebarOpen],
+    [
+      filter,
+      filteredManholes,
+      filteredPipes,
+      stats,
+      loading,
+      error,
+      search,
+      focusTarget,
+      sidebarOpen,
+    ],
   )
 
   return <MapContext.Provider value={value}>{children}</MapContext.Provider>

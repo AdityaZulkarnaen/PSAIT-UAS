@@ -1,35 +1,32 @@
 export type StatusAset = 'Baik' | 'Perbaikan' | 'Rusak'
-export type KondisiManhole = 'Lancar' | 'Tersumbat' | 'Rusak'
-export type KlasifikasiRisiko = 'Risiko Rendah' | 'Risiko Sedang' | 'Risiko Tinggi'
 export type FungsiPipa = 'Pipa Servis' | 'Pipa Lateral' | 'Pipa Utama'
-export type MaterialPipa = 'PVC' | 'GRP' | 'Beton'
 
 export interface Manhole {
   id: string
   kode: string
+  /** [lat, lng] sesuai urutan Leaflet. */
   koordinat: [number, number]
-  kondisi: KondisiManhole
+  kondisi: string
   status: StatusAset
-  klasifikasi: KlasifikasiRisiko
+  klasifikasi: string
   desa: string
   kecamatan: string
   jumlah_aduan: number
-  kedalaman_cm: number
-  diameter_cm: number
-  tahun_pasang: number
+  sektor?: number
+  wilayah?: string
 }
 
 export interface Pipa {
   id: string
-  koordinat: [number, number][]
+  /** MultiLineString: array garis berisi titik [lat, lng]. */
+  koordinat: [number, number][][]
   status: StatusAset
   fungsi: FungsiPipa
-  material: MaterialPipa
   diameter_mm: number
   panjang_m: number
   tahun_pasang: number
-  desa: string
-  kecamatan: string
+  id_jalur?: string
+  jumlah_aduan?: number
 }
 
 export interface FilterState {

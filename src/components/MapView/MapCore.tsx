@@ -84,6 +84,7 @@ export default function MapCore() {
         zoom={DEFAULT_ZOOM}
         zoomControl={false}
         scrollWheelZoom
+        preferCanvas
         className="h-full w-full"
       >
         <MapBridge onReady={handleReady} />

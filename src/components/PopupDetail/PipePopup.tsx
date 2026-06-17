@@ -16,7 +16,7 @@ function Field({ label, value }: { label: string; value: ReactNode }) {
 }
 
 export default function PipePopup({ pipa }: { pipa: Pipa }) {
-  const [firstPoint] = pipa.koordinat
+  const firstPoint = pipa.koordinat[0]?.[0]
   const koordinat = firstPoint
     ? `${firstPoint[0].toFixed(6)}, ${firstPoint[1].toFixed(6)}`
     : '—'
@@ -56,7 +56,9 @@ export default function PipePopup({ pipa }: { pipa: Pipa }) {
         <span className="text-[11px] font-bold uppercase tracking-wide text-slate-400">
           Jumlah Aduan Masuk
         </span>
-        <p className="mt-0.5 text-[16px] font-bold text-slate-700">0 Aduan</p>
+        <p className="mt-0.5 text-[16px] font-bold text-slate-700">
+          {pipa.jumlah_aduan ?? 0} Aduan
+        </p>
       </div>
 
       <button className="mt-3.5 flex w-full items-center justify-center gap-2 rounded-xl bg-red-100 py-2.5 text-sm font-semibold text-red-600 transition-colors hover:bg-red-200">
