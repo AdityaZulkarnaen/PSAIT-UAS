@@ -1,7 +1,8 @@
 {
   "permissions": {
     "allow": [
-      "Bash(curl -s https://psait-x-pad.onrender.com/openapi.json)"
+      "Bash(curl -s https://psait-x-pad.onrender.com/openapi.json)",
+      "Bash(docker version *)"
     ]
   }
 }
